@@ -3,22 +3,22 @@ import pickle
 import datetime
 import functools
 from glob import glob
-
+import logging
 
 def save(value_id: str, save_dir=None):
     """
     Save the return value of a function into a pickle file.
     :param value_id: The return value of the function will be saved at `{save_dir}/{value_id}/{version}.pkl`.
-    :param save_dir: When not set: if in jupyter, then `./{notebook_basename}.autosave`, otherwise just `./autosave`
+    :param save_dir: When not set: if in jupyter, then `./{notebook_basename}.save_return`, otherwise `data/save_return`
     :return: The decorated function, which will save the return value to a pickle file.
     """
 
     if save_dir is None:
         notebook_name = os.environ.get('JPY_SESSION_NAME')
         if notebook_name is not None:
-            save_dir = f'{notebook_name}.autosave'
+            save_dir = f'{notebook_name}.save_return'
         else:
-            save_dir = 'autosave'
+            save_dir = 'data/save_return'
     value_dir = os.path.join(save_dir, value_id)
 
     def prepare_save():
@@ -50,8 +50,11 @@ def save(value_id: str, save_dir=None):
 
             ret = func(*args, **kwargs)
 
-            with open(save_path, 'wb') as f:
-                pickle.dump(ret, f)
+            try:
+                with open(save_path, 'wb') as f:
+                    pickle.dump(ret, f)
+            except Exception:
+                logging.warning(f'Failed to save the return value of {func.__name__} to {save_path}', exc_info=True)
 
             return ret
         return wrapped

@@ -14,10 +14,10 @@ def calc_pi():
 pi = calc_pi()
 ```
 
-This will `pickle.save` `pi` to `./autosave/value_of_pi/yyyymmdd_HHMMSS_MS_00000.pkl`
+This will `pickle.save` `pi` to `./data/save_return/value_of_pi/yyyymmdd_HHMMSS_MS_00000.pkl`
 
 If used inside a Jupyter notebook named `x.ipynb`, 
-it will instead save to `./x.ipynb.autosave/value_of_pi/yyyymmdd_HHMMSS_MS_00000.pkl`
+it will instead save to `./x.ipynb.save_return/value_of_pi/yyyymmdd_HHMMSS_MS_00000.pkl`
 
 Use `@save_return.save(..., save_dir="some-dir")` to customize the save location.
 
@@ -25,12 +25,12 @@ Use `@save_return.save(..., save_dir="some-dir")` to customize the save location
 pi = calc_pi()
 ```
 
-Call it again will save `pi` to `./autosave/value_of_pi/yyyymmdd_HHMMSS_MS_00001.pkl`
+Call it again will save `pi` to `./data/save_return/value_of_pi/yyyymmdd_HHMMSS_MS_00001.pkl`
 
 ## Load
 
 The `load` function is just a wrapper around `pickle`:
 
 ```python
-pi = save_return.load('./autosave/value_of_pi/yyyymmdd_HHMMSS_MS_00000.pkl')
+pi = save_return.load('./data/save_return/value_of_pi/yyyymmdd_HHMMSS_MS_00000.pkl')
 ```
