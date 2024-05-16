@@ -14,7 +14,7 @@ def calc_pi():
 pi = calc_pi()
 ```
 
-This will `pickle.save` `pi` to `./data/save_return/value_of_pi/yyyymmdd_HHMMSS_MS_00000.pkl`
+This will `pickle.dump` `pi` to `./data/save_return/value_of_pi/yyyymmdd_HHMMSS_MS_00000.pkl`
 
 If used inside a Jupyter notebook named `x.ipynb`, 
 it will instead save to `./x.ipynb.save_return/value_of_pi/yyyymmdd_HHMMSS_MS_00000.pkl`
