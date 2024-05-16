@@ -54,7 +54,11 @@ def save(value_id: str, save_dir=None):
                 with open(save_path, 'wb') as f:
                     pickle.dump(ret, f)
             except Exception:
-                logging.warning(f'Failed to save the return value of {func.__name__} to {save_path}', exc_info=True)
+                logging.warning(
+                    f'Failed to save the return value of `{func.__name__}` to `{save_path}`. '
+                    f'The return value will not be saved, but otherwise `{func.__name__}` functions as normal.',
+                    exc_info=True
+                )
 
             return ret
         return wrapped
