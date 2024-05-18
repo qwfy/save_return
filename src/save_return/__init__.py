@@ -9,14 +9,15 @@ def save(value_id: str, save_dir=None):
     """
     Save the return value of a function into a pickle file.
     :param value_id: The return value of the function will be saved at `{save_dir}/{value_id}/{version}.pkl`.
-    :param save_dir: When not set: if in jupyter, then `./{notebook_basename}.save_return`, otherwise `data/save_return`
+    :param save_dir: When not set: if in jupyter, then `data/save_return/{notebook_basename}.var`, otherwise `data/save_return`
     :return: The decorated function, which will save the return value to a pickle file.
     """
 
     if save_dir is None:
         notebook_name = os.environ.get('JPY_SESSION_NAME')
         if notebook_name is not None:
-            save_dir = f'{notebook_name}.save_return'
+            notebook_name = os.path.basename(notebook_name)
+            save_dir = os.path.join('data/save_return', f'{notebook_name}.var')
         else:
             save_dir = 'data/save_return'
     value_dir = os.path.join(save_dir, value_id)
