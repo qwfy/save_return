@@ -1,6 +1,6 @@
 [project]
 name = "save-return"
-version = "0.2.1"
+version = "0.3.1"
 description = "Save the return value of the decorated function to a versioned pickle file"
 authors = [
     { name = "incomplete", email = "incomplete@aixon.co" }
